@@ -1,4 +1,3 @@
-from Log import log
 import json
 from collections import OrderedDict
 import tensorflow as tf
@@ -23,7 +22,6 @@ class Config(object):
         gpus = self.int_list("gpus")
         if batch_size % len(gpus) != 0:
             batch_size += batch_size % len(gpus)
-            # print >> log.v1, "Warning, batch_size not divisible by number of gpus, increasing batch_size to", batch_size
             self._entries["batch_size"] = batch_size
         if "fp16" not in self._entries:
             self._entries["fp16"] = False
@@ -62,13 +60,12 @@ class Config(object):
     def bool(self, key, default=None):
         return self._value(key, bool, default)
 
-    # def string(self, key, default=None):
-    #  return self._value(key, str, default)
+    def string(self, key, default=None):
+        return self._value(key, str, default)
+
     # actually json uses unicode
     def unicode(self, key, default=None):
-        if isinstance(default, str):
-            default = unicode(default)
-        return self._value(key, unicode, default)
+        pass
 
     def int(self, key, default=None):
         return self._value(key, int, default)
@@ -79,12 +76,13 @@ class Config(object):
     def dict(self, key, default=None):
         return self._value(key, dict, default)
 
-    def int_key_dict(self, key, default=None):
+    @staticmethod
+    def int_key_dict(key, default=None):
         if default is not None:
             assert isinstance(default, dict)
             for k in default.keys():
                 assert isinstance(k, int)
-        dict_str = self.unicode(key)
+        dict_str = str(key)
         res = eval(dict_str)
         assert isinstance(res, dict)
         for k in res.keys():

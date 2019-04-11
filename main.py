@@ -10,7 +10,7 @@ import tensorflow as tf
 
 def init_log(config):
     log_dir = config.dir("log_dir", "logs")
-    model = config.unicode("model")
+    model = config.string("model")
     filename = log_dir + model + ".log"
     verbosity = config.int("log_verbosity", 3)
     log.initialize([filename], [verbosity], [])
@@ -23,12 +23,11 @@ def main(_):
     try:
         config = Config(config_path)
     except ValueError as e:
-        print("Malformed config file: " + e)
+        print("Malformed config file: " + str(e))
         return -1
     init_log(config)
     config.initialize()
-    # dump the config into the log
-    # print >> log.v4, open(config_path).read()
+
     engine = Engine(config)
     engine.run()
 
