@@ -7,7 +7,9 @@ The code has been downloaded from the [RTWH Computer Vision Group page](https://
 and was modified to adapt to a different dataset
 
 The code implements the algorithms described in
+
 **Paul Voigtlaender and Bastian Leibe**: *Online Adaptation of Convolutional Neural Networks for Video Object Segmentation*, BMVC 2017
+
 **Paul Voigtlaender and Bastian Leibe**: *Online Adaptation of Convolutional Neural Networks for the 2017 DAVIS Challenge on Video Object Segmentation*, The 2017 DAVIS Challenge on Video Object Segmentation - CVPR Workshops
 
 ### Info
@@ -51,7 +53,8 @@ I recommend to start with configs/custom_oneshot The custom_up_oneshot adds upsa
 - adaptation_erosion_size: erosion size used during online adaptation (use 1 to disable erosion)
 - n_test_samples: the number of random sampled augmented versions of the input image per frame used during testing. Reduce this, to make inference much faster at the cost of a little bit accuracy
 
-Outputs:
+##### Outputs:
+
 Log files will be stored in logs/
 The results will be stored in forwarded/
 
