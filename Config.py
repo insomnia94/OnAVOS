@@ -65,7 +65,7 @@ class Config(object):
 
     # actually json uses unicode
     def unicode(self, key, default=None):
-        pass
+        return self.string(key, default)
 
     def int(self, key, default=None):
         return self._value(key, int, default)
