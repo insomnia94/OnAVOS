@@ -36,8 +36,11 @@ I recommend to start with *configs/DAVIS16_oneshot* (which does the one-shot app
 (note that this is based on the implementation for DAVIS2017, so that your dataset needs to be converted to the folder structure - an alternative is to write custom code to load your dataset):
 1. download the pascal or pascal_up model and put them in *OnAVOS/models/*
 2. choose a config you want to run from *configs/*
-I recommend to start with *configs/custom_oneshot* The custom_up_oneshot adds upsampling layers, which might improve the accuracy, but will increase runtime memory consumption. If you want to add online adaptation, please compare to the online configs for DAVIS2016
-3. Put your dataset in OnAVOS/custom_dataset while retaining the folder structure of the example images. The structure has to be the same as DAVIS 2017
+
+I recommend to start with *configs/custom_oneshot*
+
+The custom_up_oneshot adds upsampling layers, which might improve the accuracy, but will increase runtime memory consumption. If you want to add online adaptation, please compare to the online configs for DAVIS2016
+3. Put your dataset in *OnAVOS/custom_dataset* while retaining the folder structure of the example images. The structure has to be the same as DAVIS 2017
 4. run `python main.py configs/custom_oneshot` (or custom_up_oneshot)
 
 #### Explanation of the most important config parameters:
