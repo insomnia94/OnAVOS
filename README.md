@@ -8,9 +8,11 @@ and was modified to adapt to a different dataset
 
 The code implements the algorithms described in
 
-**Paul Voigtlaender and Bastian Leibe**: *Online Adaptation of Convolutional Neural Networks for Video Object Segmentation*, BMVC 2017
+**Paul Voigtlaender and Bastian Leibe**: *Online Adaptation of Convolutional Neural Networks for Video Object
+Segmentation*, BMVC 2017
 
-**Paul Voigtlaender and Bastian Leibe**: *Online Adaptation of Convolutional Neural Networks for the 2017 DAVIS Challenge on Video Object Segmentation*, The 2017 DAVIS Challenge on Video Object Segmentation - CVPR Workshops
+**Paul Voigtlaender and Bastian Leibe**: *Online Adaptation of Convolutional Neural Networks for the 2017 DAVIS
+Challenge on Video Object Segmentation*, The 2017 DAVIS Challenge on Video Object Segmentation - CVPR Workshops
 
 ### Info
 
@@ -33,10 +35,14 @@ I recommend to start with *configs/DAVIS16_oneshot* (which does the one-shot app
 
 #### Instructions for running on a custom dataset
 
-(note that this is based on the implementation for DAVIS2017, so that your dataset needs to be converted to the folder structure - an alternative is to write custom code to load your dataset):
+(note that this is based on the implementation for DAVIS2017, so that your dataset needs to be converted to the
+folder structure - an alternative is to write custom code to load your dataset):
 1. download the pascal or pascal_up model and put them in *OnAVOS/models/*
-2. choose a config you want to run from *configs/*. I recommend to start with *configs/custom_oneshot*. The custom_up_oneshot adds upsampling layers, which might improve the accuracy, but will increase runtime memory consumption. If you want to add online adaptation, please compare to the online configs for DAVIS2016
-3. Put your dataset in *OnAVOS/custom_dataset* while retaining the folder structure of the example images. The structure has to be the same as DAVIS 2017
+2. choose a config you want to run from *configs/*. I recommend to start with *configs/custom_oneshot*. The
+*custom_up_oneshot* adds upsampling layers, which might improve the accuracy, but will increase runtime memory
+consumption. If you want to add online adaptation, please compare to the online configs for DAVIS2016
+3. Put your dataset in *OnAVOS/custom_dataset* while retaining the folder structure of the example images.
+The structure has to be the same as DAVIS 2017
 4. run `python main.py configs/custom_oneshot` (or custom_up_oneshot)
 
 #### Explanation of the most important config parameters:
@@ -44,13 +50,15 @@ I recommend to start with *configs/DAVIS16_oneshot* (which does the one-shot app
 - *n_finetune_steps*: the number of steps for fine-tuning on the first frame
 - *learning_rates*: dictionary mapping from step number to a learning rate
 - *n_adaptation_steps*: number of update steps per frame during adaptation
-- *adaptation_interval*: during online adaptation, each adaptation_interval steps, the current frame is used for updating, otherwise the first frame
+- *adaptation_interval*: during online adaptation, each adaptation_interval steps, the current frame is used for 
+updating, otherwise the first frame
 - *adaptation_learning_rate*: learning rate used during online adaptation
 - *posterior_positive_threshold*: posterior probability threshold used to obtain the positive training examples
 - *distance_negative_threshold*: distance threshold (to the last mask) used to select the negative examples
 - *adaptation_loss_scale*: weighting factor of loss during online adaptation
 - *adaptation_erosion_size*: erosion size used during online adaptation (use 1 to disable erosion)
-- *n_test_samples*: the number of random sampled augmented versions of the input image per frame used during testing. Reduce this, to make inference much faster at the cost of a little bit accuracy
+- *n_test_samples*: the number of random sampled augmented versions of the input image per frame used during testing.
+Reduce this, to make inference much faster at the cost of a little bit accuracy
 
 ##### Outputs:
 
