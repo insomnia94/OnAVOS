@@ -135,8 +135,9 @@ class ImageForwarder(BasicForwarder):
                 cv2.imwrite(out_fn, numpy.squeeze(y_scaled, axis=2))
             print(out_fn)
         if logit is not None:
-            out_fn_logits = out_fn.replace(".png", ".pickle")
-            pickle.dump(logit, open(out_fn_logits, "w"), pickle.HIGHEST_PROTOCOL)
+            # out_fn_logits = out_fn.replace(".png", ".pickle")
+            # pickle.dump(logit, open(out_fn_logits, "wb"), pickle.HIGHEST_PROTOCOL)
+            pass
         for e in extraction_vals:
             assert e.shape[0] == 1  # batch size should be 1 here for now
         for name, val in zip(self.extractions, extraction_vals):

@@ -2,6 +2,7 @@ import numpy
 import glob
 import random
 import scipy.ndimage
+import cv2
 from PIL import Image
 
 from datasets.FeedDataset import OneshotImageDataset
@@ -20,13 +21,16 @@ def _load_frame(im, an):
         im_val = scipy.ndimage.imread(im.replace(seq_full, seq_base)) / 255.0
         if an is None:
             an_postproc = numpy.zeros(im_val.shape[:2], numpy.uint8)
-        else:
+        else:  # STEFANO EDIT --> IT WON?T WORK ON MULTI LABEL MASKS; THIS WAY!!!!
             # an_raw = scipy.ndimage.imread(an.replace(seq_full, seq_base))
             # an_postproc = (an_raw == color).astype(numpy.uint8).min(axis=2)
             id_ = numpy.array(int(im.split("__")[1].split("/")[-2]))
             # load like this to prevent scipy from converting the palette indices to rgbº
-            an_raw = numpy.array(Image.open(an.replace(seq_full, seq_base)))
-            an_postproc = (an_raw == id_).astype(numpy.uint8)
+            # an_raw = numpy.array(Image.open(an.replace(seq_full, seq_base)))
+            # an_postproc = (an_raw == id_).astype(numpy.uint8)
+            an_raw = cv2.imread(an.replace(seq_full, seq_base), cv2.IMREAD_GRAYSCALE)
+            an_postproc = an_raw
+            an_postproc[an_raw>0] = 1
     else:
         im_val = scipy.ndimage.imread(im) / 255.0
         if an is None:

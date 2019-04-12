@@ -18,7 +18,7 @@
 "n_finetune_steps": 50,
 "learning_rates": "{1: 0.000003}",
 "save_oneshot": true,
-"save_logits": true,
+"save_logits": false,
 
 "augmentors_train": ["gamma", "flip"],
 "resize_mode_train": "random_resize",
