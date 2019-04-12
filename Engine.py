@@ -5,7 +5,7 @@ import tensorflow as tf
 from tensorflow.contrib.framework import list_variables
 
 import Measures
-from .logging_utils import logger
+from logging_utils import logger
 from Log import log
 from Network import Network
 from Trainer import Trainer

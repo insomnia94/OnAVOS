@@ -24,7 +24,7 @@ def _load_frame(im, an):
             # an_raw = scipy.ndimage.imread(an.replace(seq_full, seq_base))
             # an_postproc = (an_raw == color).astype(numpy.uint8).min(axis=2)
             id_ = numpy.array(int(im.split("__")[1].split("/")[-2]))
-            # load like this to prevent scipy from converting the palette indices to rgb
+            # load like this to prevent scipy from converting the palette indices to rgbº
             an_raw = numpy.array(Image.open(an.replace(seq_full, seq_base)))
             an_postproc = (an_raw == id_).astype(numpy.uint8)
     else:

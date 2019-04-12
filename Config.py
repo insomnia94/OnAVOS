@@ -76,13 +76,12 @@ class Config(object):
     def dict(self, key, default=None):
         return self._value(key, dict, default)
 
-    @staticmethod
-    def int_key_dict(key, default=None):
+    def int_key_dict(self, key, default=None):
         if default is not None:
             assert isinstance(default, dict)
             for k in default.keys():
                 assert isinstance(k, int)
-        dict_str = str(key)
+        dict_str = self.unicode(key)
         res = eval(dict_str)
         assert isinstance(res, dict)
         for k in res.keys():
@@ -93,7 +92,7 @@ class Config(object):
         return self._list_value(key, int, default)
 
     def unicode_list(self, key, default=None):
-        return self._list_value(key, unicode, default)
+        return self._list_value(key, str, default)
 
     def dir(self, key, default=None):
         p = self.unicode(key, default)

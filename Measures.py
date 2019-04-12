@@ -3,7 +3,7 @@ import tensorflow as tf
 from sklearn.metrics import confusion_matrix, average_precision_score
 
 import Constants
-from .logging_utils import logger
+from logging_utils import logger
 
 
 def create_confusion_matrix(pred, targets, n_classes):

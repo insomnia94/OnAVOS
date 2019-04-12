@@ -3,7 +3,7 @@ import pickle
 import numpy
 import tensorflow as tf
 
-from .logging_utils import logger
+from logging_utils import logger
 
 
 # from https://github.com/tensorflow/models/blob/master/tutorials/image/cifar10/cifar10_multi_gpu_train.py

@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractmethod
 from scipy.misc import imsave
 import numpy
 import tensorflow as tf
-
+import cv2
 from Measures import compute_iou_for_binary_segmentation, compute_measures_for_binary_segmentation, average_measures
 from datasets.Util.pascal_colormap import save_with_pascal_colormap
 
@@ -109,6 +109,7 @@ class ImageForwarder(BasicForwarder):
         return tf.image.resize_images(y_softmax, tf.shape(targets)[1:3])
 
     def _process_forward_result(self, y_argmax, logit, target, tag, extraction_vals, main_folder, save_results):
+        tag = "".join( chr(x) for x in tag)
         # hack for avoiding storing logits for frames, which are not evaluated
         if "DO_NOT_STORE_LOGITS" in tag:
             logit = None
@@ -131,7 +132,7 @@ class ImageForwarder(BasicForwarder):
                 save_with_pascal_colormap(out_fn, y_argmax)
             else:
                 y_scaled = (y_argmax * 255).astype("uint8")
-                imsave(out_fn, numpy.squeeze(y_scaled, axis=2))
+                cv2.imwrite(out_fn, numpy.squeeze(y_scaled, axis=2))
             print(out_fn)
         if logit is not None:
             out_fn_logits = out_fn.replace(".png", ".pickle")
@@ -152,7 +153,7 @@ class ImageForwarder(BasicForwarder):
         main_folder = "forwarded/" + self.model + "/" + data.subset + "/"
         tf.gfile.MakeDirs(main_folder)
 
-        ys_argmax = tf.arg_max(ys, 3)
+        ys_argmax = tf.argmax(ys, 3)
 
         if len(self.extractions) > 0:
             assert len(network.tower_layers) == 1, len(network.tower_layers)
