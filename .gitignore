@@ -2,8 +2,8 @@
 models/
 logs/
 summaries/
-custom_dataset/
-forwarded/
+custom_dataset
+forwarded
 
 
 # Byte-compiled / optimized / DLL files
